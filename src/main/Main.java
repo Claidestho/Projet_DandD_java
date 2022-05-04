@@ -8,10 +8,11 @@ public class Main {
 
     public static void main(String[] args) {
         MainMenu menu = new MainMenu();
+        GameCore game = new GameCore(menu);
         Hero playerCharacter = menu.startMenu();
-        GameCore game = new GameCore();
         menu.displaySeparator();
         menu.displayGameStart(playerCharacter, game);
+        game.playTurn(menu);
 
 
     }

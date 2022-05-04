@@ -1,8 +1,15 @@
 package system;
 
+import menu.MainMenu;
+
 public class GameCore {
     private int tileNumber = 64;
     private int currentPosition = 0;
+    private int turnCounter = 0;
+
+    public GameCore(MainMenu menu){
+
+    }
 
     public int throwDice() {
         int maxDiceValue = 6;
@@ -11,8 +18,11 @@ public class GameCore {
         return diceResult;
     }
 
-    public void playTurn() {
+    public void playTurn(MainMenu menu) {
+        this.turnCounter++;
         this.throwDice();
+        menu.turnStart(this);
+
 
     }
 
@@ -23,6 +33,10 @@ public class GameCore {
 
     public int getCurrentPosition() {
         return currentPosition;
+    }
+
+    public int getTurnCounter() {
+        return turnCounter;
     }
 }
 

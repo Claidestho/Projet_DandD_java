@@ -79,8 +79,14 @@ public class MainMenu {
 
     public void displayGameStart(Hero hero, GameCore game) {
 
-        System.out.println("Bienvenu dans le Donjon " + hero.getName() + " ! Tu es actuellement sur la case " + game.getCurrentPosition() + " Pour lancer le dé appuyez sur [1] - Pour quitter la partie appuyez sur [2]");
+        System.out.println("Bienvenue dans le Donjon " + hero.getName() + " ! Tu es actuellement sur la case " + game.getCurrentPosition() + " Pour lancer le dé appuyez sur [1] - Pour quitter la partie appuyez sur [2]");
 
 
+    }
+
+    public void turnStart(GameCore game){
+        System.out.println("TOUR " + game.getTurnCounter());
+        System.out.println("Votre position : Case " + game.getCurrentPosition());
+        System.out.println("Appuyer sur [1] pour lancer les dés - [2] pour quitter la partie");
     }
 }
