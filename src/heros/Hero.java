@@ -5,6 +5,15 @@ public abstract class Hero {
     private int healthPoints;
     private int attackPoints;
 
+
+    @Override
+    public String toString() {
+        return "**********************\nSTATISTIQUES\nNom : " + name +
+                "\nPoints de vie : " + healthPoints +
+                "\nPuissance : " + attackPoints + "\n**********************";
+    }
+
+
     public String showCharacterStats() {
         return "Nom : " + this.name + "\nPoints de vie : " + this.getHealthPoints() + "\nPuissance : " + this.getAttackPoints();
     }

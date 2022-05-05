@@ -26,32 +26,4 @@ public class Magician extends Hero {
         this.potion = potion;
     }
 
-    @Override
-    public String toString() {
-        return "classes.Magician{" +
-                "name='" + this.name + '\'' +
-                ", healthPoints=" + this.getHealthPoints() +
-                ", attackPoints=" + this.getAttackPoints() +
-                ", spell='" + this.spell + '\'' +
-                ", potion='" + this.potion + '\'' +
-                '}';
-    }
-
-    public String getSpell() {
-        return this.spell;
-    }
-
-    public void setSpell(String spell) {
-        this.spell = spell;
-    }
-
-    public String getPotion() {
-        return this.potion;
-    }
-
-    public void setPotion(String potion) {
-        this.potion = potion;
-    }
-
-
 }

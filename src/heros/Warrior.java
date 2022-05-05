@@ -23,16 +23,5 @@ public class Warrior extends Hero {
         this.setAttackPoints(attackPoints);
     }
 
-    @Override
-    public String toString() {
-        return "classes.Warrior{" +
-                "name='" + this.getName() + '\'' +
-                ", healthPoints=" + this.getHealthPoints() +
-                ", attackPoints=" + this.getAttackPoints() +
-                ", weapon='" + weapon + '\'' +
-                ", shield='" + shield + '\'' +
-                '}';
-    }
-
 
 }
