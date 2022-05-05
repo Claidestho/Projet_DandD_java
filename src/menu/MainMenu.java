@@ -93,4 +93,7 @@ public class MainMenu {
         System.out.println("👌👌👌👌 BRAVO CEST TRES LA VICTOIRE HIHI 👌👌👌👌");
         this.displaySeparator();
     }
+    public void displayEndMessage(){
+        System.out.println("Souhaitez vous rejouer ? [1] Oui - [2] Non");
+    }
 }

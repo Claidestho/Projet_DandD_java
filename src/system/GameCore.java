@@ -36,28 +36,47 @@ public class GameCore {
                 case 1 -> {
                     this.turnCounter++;
                     int diceResult = this.throwDice();
-                    this.currentPosition += diceResult;
+                    this.currentPosition += 33;
                 }
                 case 2 -> System.out.println(this.heroPlayer);
                 case 3 -> gameMenu.defineNewName(this.heroPlayer);
                 case 4 -> System.exit(0);
             }
         }
+
+        try {
+            getException(this.currentPosition);
+
+        } catch (OutOfBoundException e) {
+            System.out.println("Erreur : Limites du plateau dépassées");
+        } finally {
+            System.exit(0);
+        }
+
         gameMenu.displayWinMessage();
+        this.restartGame();
+    }
+
+    public void restartGame() {
+        System.out.println("Voulez vous rejouer ? | [1] Oui - [2] Non");
+        int lastChoice = gameMenu.getAnswerInt(this.userInput, 2);
+        if (lastChoice == 1) {
+            this.currentPosition = 0;
+            this.turnCounter = 0;
+            playGame();
+        } else {
+            System.exit(0);
+        }
     }
 
 
-    public int getTileNumber() {
-        return tileNumber;
+    public void getException(int position) throws OutOfBoundException {
+        if (position > this.tileNumber) {
+            throw new OutOfBoundException();
+        }
     }
 
-    public int getCurrentPosition() {
-        return currentPosition;
-    }
-
-    public int getTurnCounter() {
-        return turnCounter;
-    }
 }
+
 
 
