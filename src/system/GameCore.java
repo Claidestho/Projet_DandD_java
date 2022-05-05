@@ -2,6 +2,7 @@ package system;
 
 import heros.Hero;
 import menu.MainMenu;
+import system.exceptions.OutOfBoundException;
 
 import java.util.Scanner;
 
