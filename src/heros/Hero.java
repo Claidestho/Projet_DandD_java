@@ -1,10 +1,15 @@
 package heros;
 
 public abstract class Hero {
-    public String name;
+    private String name;
     private int healthPoints;
     private int attackPoints;
 
+    protected Hero(String name, int healthPoints, int attackPoints) {
+        this.name = name;
+        this.healthPoints = healthPoints;
+        this.attackPoints = attackPoints;
+    }
 
     @Override
     public String toString() {

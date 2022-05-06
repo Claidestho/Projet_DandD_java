@@ -37,7 +37,7 @@ public class GameCore {
                 case 1 -> {
                     this.turnCounter++;
                     int diceResult = this.throwDice();
-                    this.currentPosition += 33;
+                    this.currentPosition += diceResult;
                 }
                 case 2 -> System.out.println(this.heroPlayer);
                 case 3 -> gameMenu.defineNewName(this.heroPlayer);
@@ -46,12 +46,10 @@ public class GameCore {
         }
 
         try {
-            getException(this.currentPosition);
+            getOOBException(this.currentPosition);
 
         } catch (OutOfBoundException e) {
-            System.out.println("Erreur : Limites du plateau dépassées");
-        } finally {
-            System.exit(0);
+            System.out.println("ERREUR : Limites du plateau dépassées, vous avez quand même gagné !");
         }
 
         gameMenu.displayWinMessage();
@@ -71,7 +69,7 @@ public class GameCore {
     }
 
 
-    public void getException(int position) throws OutOfBoundException {
+    public void getOOBException(int position) throws OutOfBoundException {
         if (position > this.tileNumber) {
             throw new OutOfBoundException();
         }

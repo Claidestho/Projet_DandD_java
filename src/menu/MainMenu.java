@@ -4,6 +4,7 @@ import heros.Hero;
 import heros.Magician;
 import heros.Warrior;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -59,21 +60,28 @@ public class MainMenu {
         return playerClass;
     }
 
-    public void defineNewName(Hero hero){
+    public void defineNewName(Hero hero) {
         System.out.println("Veuillez choisir le nouveau nom de votre personnage :");
-        hero.name = userInput.nextLine();
+        hero.setName(userInput.nextLine());
     }
 
     public int getAnswerInt(Scanner userAnswer, int choicesNumber) {
-        System.out.println("\nFaites votre choix :");
-        int answer = userAnswer.nextInt();
-        userAnswer.nextLine();
-        while (answer <= 0 || answer > choicesNumber) {
-            System.out.println("Entrée incorrecte, veuillez faire votre choix parmi les " + choicesNumber + " propositions disponibles.");
-            answer = userAnswer.nextInt();
+        int answer;
+
+        do {
+            System.out.println("\nFaites votre choix :");
+            try {
+                answer = userAnswer.nextInt();
+                if(answer > 0 && answer <= choicesNumber) {
+                    return answer;
+                }
+                System.out.println("Entrée incorrecte, veuillez faire votre choix parmi les " + choicesNumber + " propositions disponibles.");
+            } catch (InputMismatchException e) {
+                System.out.println("ERREUR : ENTREE INCORRECTE, RECOMMENCEZ");
+
+            }
             userAnswer.nextLine();
-        }
-        return answer;
+        } while (true);
     }
 
     public void displaySeparator() {
@@ -93,7 +101,10 @@ public class MainMenu {
         System.out.println("👌👌👌👌 BRAVO CEST TRES LA VICTOIRE HIHI 👌👌👌👌");
         this.displaySeparator();
     }
-    public void displayEndMessage(){
+
+    public void displayEndMessage() {
         System.out.println("Souhaitez vous rejouer ? [1] Oui - [2] Non");
     }
+
+
 }

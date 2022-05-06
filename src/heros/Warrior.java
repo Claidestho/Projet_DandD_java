@@ -6,21 +6,15 @@ public class Warrior extends Hero {
 
     //Default constructor
     public Warrior() {
-        this.setName("Defaut");
-        this.setHealthPoints(10);
-        this.setAttackPoints(10);
+        this("Gerard");
     }
 
     public Warrior(String name) {
-        this.setName(name);
-        this.setHealthPoints(5);
-        this.setAttackPoints(5);
+        this(name, 5, 5);
     }
 
     public Warrior(String name, int healthPoints, int attackPoints) {
-        this.setName(name);
-        this.setHealthPoints(healthPoints);
-        this.setAttackPoints(attackPoints);
+        super(name, healthPoints, attackPoints);
     }
 
 
