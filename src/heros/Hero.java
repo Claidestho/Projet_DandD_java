@@ -1,5 +1,8 @@
 package heros;
 
+/**
+ * Abstract class parent of the classes Warrior and Magician. The Hero constructor is used by both of them.
+ */
 public abstract class Hero {
     private String name;
     private int healthPoints;
@@ -11,16 +14,15 @@ public abstract class Hero {
         this.attackPoints = attackPoints;
     }
 
+    /**
+     * This method is used to show the stats sheet of the player character. It will be used by all Hero's children.
+     * @return
+     */
     @Override
     public String toString() {
         return "**********************\nSTATISTIQUES\nNom : " + name +
                 "\nPoints de vie : " + healthPoints +
                 "\nPuissance : " + attackPoints + "\n**********************";
-    }
-
-
-    public String showCharacterStats() {
-        return "Nom : " + this.name + "\nPoints de vie : " + this.getHealthPoints() + "\nPuissance : " + this.getAttackPoints();
     }
 
     public String getName() {

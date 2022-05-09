@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"system","l":"GameCore"},{"p":"heros","l":"Hero"},{"p":"heros","l":"Magician"},{"p":"main","l":"Main"},{"p":"menu","l":"MainMenu"},{"p":"system.exceptions","l":"OutOfBoundException"},{"p":"heros","l":"Warrior"}];updateSearchResults();

@@ -4,7 +4,9 @@ public class Warrior extends Hero {
     private String weapon;
     private String shield;
 
-    //Default constructor
+    /**
+     * The default constructor permit to generate a new character with a default name and empty stats.
+     */
     public Warrior() {
         this("Gerard");
     }

@@ -6,6 +6,9 @@ import system.exceptions.OutOfBoundException;
 
 import java.util.Scanner;
 
+/**
+ * This class handle all the logic of the game. Need to put all the display in the MainMenu class.
+ */
 public class GameCore {
     private int tileNumber;
     private int currentPosition;
@@ -28,6 +31,9 @@ public class GameCore {
         return diceResult;
     }
 
+    /**
+     * This function handle all the logic of the game for now. It permit the user to throw the dice, view his character stats sheet, rename his character and quit the game.
+     */
     public void playGame() {
 
         while (this.currentPosition < this.tileNumber) {
@@ -56,6 +62,9 @@ public class GameCore {
         this.restartGame();
     }
 
+    /**
+     * This function handle the end of a game, asking the user if he wants to launch another game or quit.
+     */
     public void restartGame() {
         System.out.println("Voulez vous rejouer ? | [1] Oui - [2] Non");
         int lastChoice = gameMenu.getAnswerInt(this.userInput, 2);
@@ -68,7 +77,11 @@ public class GameCore {
         }
     }
 
-
+    /**
+     * Define the condition needed to throw an out of bound exception when the player go past the maximum number of tiles available.
+     * @param position
+     * @throws OutOfBoundException
+     */
     public void getOOBException(int position) throws OutOfBoundException {
         if (position > this.tileNumber) {
             throw new OutOfBoundException();
