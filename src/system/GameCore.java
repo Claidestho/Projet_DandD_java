@@ -2,8 +2,11 @@ package system;
 
 import heros.Hero;
 import menu.MainMenu;
+import system.board.Tile;
 import system.exceptions.OutOfBoundException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -11,6 +14,7 @@ import java.util.Scanner;
  */
 public class GameCore {
     private int tileNumber;
+    private List board;
     private int currentPosition;
     private int turnCounter;
     private MainMenu gameMenu;
@@ -22,6 +26,7 @@ public class GameCore {
         this.heroPlayer = player;
         this.tileNumber = 64;
         this.userInput = new Scanner(System.in);
+        this.board = new ArrayList<Tile>(64);
     }
 
     public int throwDice() {
@@ -37,6 +42,7 @@ public class GameCore {
     public void playGame() {
 
         while (this.currentPosition < this.tileNumber) {
+            System.out.println(board);
             gameMenu.turnStart(this.turnCounter, this.currentPosition, this.heroPlayer);
             int intChoice = gameMenu.getAnswerInt(this.userInput, 4);
             switch (intChoice) {
@@ -79,6 +85,7 @@ public class GameCore {
 
     /**
      * Define the condition needed to throw an out of bound exception when the player go past the maximum number of tiles available.
+     *
      * @param position
      * @throws OutOfBoundException
      */

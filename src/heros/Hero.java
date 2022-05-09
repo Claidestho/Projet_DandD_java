@@ -1,5 +1,8 @@
 package heros;
 
+import items.potions.Potion;
+import items.weapons.Weapon;
+
 /**
  * Abstract class parent of the classes Warrior and Magician. The Hero constructor is used by both of them.
  */
@@ -7,6 +10,9 @@ public abstract class Hero {
     private String name;
     private int healthPoints;
     private int attackPoints;
+
+    private Weapon weapon;
+    private Potion potion;
 
     protected Hero(String name, int healthPoints, int attackPoints) {
         this.name = name;
