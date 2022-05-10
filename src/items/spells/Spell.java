@@ -1,5 +1,6 @@
 package items.spells;
 
+import heros.Hero;
 import system.board.Tile;
 
 public abstract class Spell extends Tile {
@@ -25,5 +26,11 @@ public abstract class Spell extends Tile {
 
     public void setPower(int power) {
         this.power = power;
+    }
+
+    @Override
+    public boolean interactWithPlayer(Hero player) {
+        player.upgradeAttack(this.power);
+        return false;
     }
 }

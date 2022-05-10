@@ -1,5 +1,6 @@
 package items.weapons;
 
+import heros.Hero;
 import system.board.Tile;
 
 public abstract class Weapon extends Tile {
@@ -25,5 +26,11 @@ public abstract class Weapon extends Tile {
 
     public void setStrength(int strength) {
         this.strength = strength;
+    }
+
+    @Override
+    public boolean interactWithPlayer(Hero player) {
+        player.upgradeAttack(this.getStrength());
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 package items.potions;
 
+import heros.Hero;
 import system.board.Tile;
 
 public abstract class Potion extends Tile {
@@ -26,4 +27,11 @@ public abstract class Potion extends Tile {
     public void setHealthUpgrade(int healthUpgrade) {
         this.healthUpgrade = healthUpgrade;
     }
+
+    @Override
+    public boolean interactWithPlayer(Hero player) {
+        player.upgradeHealth(this.getHealthUpgrade());
+        return false;
+    }
+
 }

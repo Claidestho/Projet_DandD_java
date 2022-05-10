@@ -54,4 +54,12 @@ public abstract class Hero {
     public void setAttackPoints(int attackPoints) {
         this.attackPoints = attackPoints;
     }
+
+    public void upgradeHealth(int amount){
+        this.healthPoints += amount;
+    }
+
+    public void upgradeAttack(int amount){
+        this.attackPoints += amount;
+    }
 }

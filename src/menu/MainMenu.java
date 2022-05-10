@@ -85,6 +85,7 @@ public class MainMenu {
             try {
                 answer = userAnswer.nextInt();
                 if(answer > 0 && answer <= choicesNumber) {
+                    userAnswer.nextLine();
                     return answer;
                 }
                 System.out.println("Entrée incorrecte, veuillez faire votre choix parmi les " + choicesNumber + " propositions disponibles.");

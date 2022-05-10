@@ -1,5 +1,6 @@
 package enemies;
 
+import heros.Hero;
 import system.board.Tile;
 
 public abstract class Enemy extends Tile {
@@ -35,5 +36,11 @@ public abstract class Enemy extends Tile {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean interactWithPlayer(Hero player) {
+        System.out.println("COMBAT AVEC UN " + this.name);
+        return false;
     }
 }
