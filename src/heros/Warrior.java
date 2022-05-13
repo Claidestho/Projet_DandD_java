@@ -1,8 +1,6 @@
 package heros;
 
 public class Warrior extends Hero {
-    private String weapon;
-    private String shield;
 
     /**
      * The default constructor permit to generate a new character with a default name and empty stats.
@@ -12,11 +10,11 @@ public class Warrior extends Hero {
     }
 
     public Warrior(String name) {
-        this(name, 5, 5);
+        this(name, 5, 5, 10, 10);
     }
 
-    public Warrior(String name, int healthPoints, int attackPoints) {
-        super(name, healthPoints, attackPoints);
+    public Warrior(String name, int healthPoints, int attackPoints, int maxAttack, int maxHealth) {
+        super(name, healthPoints, attackPoints, maxAttack, maxHealth);
     }
 
 

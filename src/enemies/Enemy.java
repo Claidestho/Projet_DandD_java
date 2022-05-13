@@ -40,7 +40,31 @@ public abstract class Enemy extends Tile {
 
     @Override
     public boolean interactWithPlayer(Hero player) {
-        System.out.println("COMBAT AVEC UN " + this.name);
+        boolean isAttacking = true;
+        System.out.println("////////////////////////////\nCOMBAT AVEC UN " + this.name + "\n////////////////////////////");
+
+        while (this.healthPoints >= 0 && player.getHealthPoints() >= 0) {
+            if (isAttacking) {
+                this.healthPoints -= player.getAttackPoints();
+                System.out.println("Tu infliges " + player.getAttackPoints() + "! Il reste  " + this.healthPoints + " PDV au " + this.name);
+                isAttacking = false;
+            } else {
+                player.setHealthPoints(player.getHealthPoints() - this.attackPoints);
+                System.out.println(this.name + " t'ingliges " + this.attackPoints + " dégats ! Il te reste " + player.getHealthPoints() + " PDV");
+                isAttacking = true;
+            }
+            if (this.healthPoints <= 0) {
+                System.out.println("GG il est mort hihi");
+            } else if (player.getHealthPoints() <= 0) {
+                System.out.println("Ho non tu es mort nonnn :(((");
+            }
+
+        }
         return false;
+    }
+
+    public void combatPlayer() {
+
+
     }
 }

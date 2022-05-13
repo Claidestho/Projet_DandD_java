@@ -1,8 +1,6 @@
 package heros;
 
 public class Magician extends Hero {
-    private String spell;
-    private String potion;
 
     /**
      * The default constructor permit to generate a new character with a default name and empty stats.
@@ -12,11 +10,11 @@ public class Magician extends Hero {
     }
 
     public Magician(String name) {
-        this(name, 3, 8);
+        this(name, 3, 8, 15, 6);
     }
 
-    public Magician(String name, int healthPoints, int attackPoints) {
-        super(name, healthPoints, attackPoints);
+    public Magician(String name, int healthPoints, int attackPoints, int maxAttack, int maxHealth) {
+        super(name, healthPoints, attackPoints, maxAttack, maxHealth);
     }
 
 }

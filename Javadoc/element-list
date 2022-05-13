@@ -1,6 +1,10 @@
+enemies
 heros
-items
+items.potions
+items.spells
+items.weapons
 main
 menu
 system
+system.board
 system.exceptions

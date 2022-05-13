@@ -7,13 +7,24 @@ import heros.Warrior;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This class will hold all the display of the game. All the interactions with the user will be put here and not in the GameCore.
+ */
 public class MainMenu {
     private Scanner userInput;
 
+    /**
+     * This constructor will define the Scanner attribute used to receive users inputs.
+     */
     public MainMenu() {
         this.userInput = new Scanner(System.in);
     }
 
+    /**
+     * The method that launch the first menu
+     *
+     * @return false return to make if/else works
+     */
     public Hero startMenu() {
         int wantsToPlay = displayWelcomeMessage();
         if (wantsToPlay == 1) {
@@ -27,6 +38,11 @@ public class MainMenu {
 
     }
 
+    /**
+     * This method displau the logo of the game and receive user input
+     *
+     * @return
+     */
     public int displayWelcomeMessage() {
         System.out.println("$$$$$$$\\         $$$$$$\\                  $$\\       $$$$$$$\\  \n" +
                 "$$  __$$\\       $$  __$$\\                 $$ |      $$  __$$\\ \n" +
@@ -43,7 +59,8 @@ public class MainMenu {
 
     /**
      * This method handle the whole character creation process, the display and the logic. The logic part should be integrated in the GameCore classe, to divide in a better way the display and the logic between these 2 classes.
-     * @return
+     *
+     * @return Return the Hero with the specialized type chosen by the user
      */
     public Hero createNewCharacter() {
         System.out.print("Hello l'aventurier, choisis donc la super classe de ouf que tu souhaites jouer : " +
@@ -66,6 +83,11 @@ public class MainMenu {
         return playerClass;
     }
 
+    /**
+     * This method permit to rename the hero during the game
+     *
+     * @param hero -> Player character
+     */
     public void defineNewName(Hero hero) {
         System.out.println("Veuillez choisir le nouveau nom de votre personnage :");
         hero.setName(userInput.nextLine());
@@ -73,7 +95,8 @@ public class MainMenu {
 
     /**
      * This method is used every time the user is asked to make a choice between multiple answers. It manage the number of answers possible for each questiosn, and return an error if the int given by the user isn't possible.
-     * @param userAnswer This parameter correspond to the int inputed by the user
+     *
+     * @param userAnswer    This parameter correspond to the int inputed by the user
      * @param choicesNumber The number of choices available for the question
      * @return Return the choice made by the user (integer)
      */
@@ -84,7 +107,7 @@ public class MainMenu {
             System.out.println("\nFaites votre choix :");
             try {
                 answer = userAnswer.nextInt();
-                if(answer > 0 && answer <= choicesNumber) {
+                if (answer > 0 && answer <= choicesNumber) {
                     userAnswer.nextLine();
                     return answer;
                 }
@@ -97,12 +120,17 @@ public class MainMenu {
         } while (true);
     }
 
+    /**
+     * Display a simple separator
+     */
+
     public void displaySeparator() {
         System.out.println("===================================================================");
     }
 
     /**
      * This method manage the content displayed every turn to the user.
+     *
      * @param counter
      * @param currentPosition
      * @param hero
@@ -110,17 +138,23 @@ public class MainMenu {
     public void turnStart(int counter, int currentPosition, Hero hero) {
         this.displaySeparator();
         System.out.println("TOUR " + counter);
-        System.out.println("Votre position : Case " + currentPosition);
+        System.out.println("Votre position : Case " + (currentPosition + 1));
         System.out.println("[1] Lancer les dés - [2] Afficher les statistiques de " + hero.getName() + " - [3] Renommer le héros (" + hero.getName() + ") - [4] Quitter la partie ");
         this.displaySeparator();
     }
 
+    /**
+     * Message to be displayed in case of a win
+     */
     public void displayWinMessage() {
         this.displaySeparator();
         System.out.println("👌👌👌👌 BRAVO CEST TRES LA VICTOIRE HIHI 👌👌👌👌");
         this.displaySeparator();
     }
 
+    /**
+     * Message to be displayed in case of a loss
+     */
     public void displayDefeatMessage() {
         System.out.println("Souhaitez vous rejouer ? [1] Oui - [2] Non");
     }

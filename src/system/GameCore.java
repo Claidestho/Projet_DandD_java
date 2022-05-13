@@ -1,8 +1,11 @@
 package system;
 
+import enemies.Dragon;
 import enemies.Goblin;
 import heros.Hero;
+import items.potions.LargePotion;
 import items.potions.MediumPotion;
+import items.spells.Lightning;
 import items.weapons.Sword;
 import menu.MainMenu;
 import system.board.EmptyTile;
@@ -19,35 +22,45 @@ import java.util.Scanner;
 public class GameCore {
     private final int tileNumber;
     private final List<Tile> board;
-    private int currentPosition;
-    private int turnCounter;
     private final MainMenu gameMenu;
     private final Hero heroPlayer;
     private final Scanner userInput;
+    private int currentPosition;
+    private int turnCounter;
+    private int gameNumber;
 
     public GameCore(MainMenu menu, Hero player) {
         this.gameMenu = menu;
         this.heroPlayer = player;
         this.tileNumber = 64;
         this.userInput = new Scanner(System.in);
-        this.board = new ArrayList<Tile>(64);
+        this.board = new ArrayList<Tile>();
     }
 
 
     public List generateBoard() {
+        Tile dragon = new Dragon();
         Tile emptyTile = new EmptyTile();
         Tile goblin = new Goblin();
         Tile sword = new Sword();
         Tile medPotion = new MediumPotion();
+        Tile LargePotion = new LargePotion();
+        Tile Lightning = new Lightning();
 
         this.board.add(emptyTile);
+        this.board.add(emptyTile);
+        this.board.add(sword);
+        this.board.add(dragon);
+        this.board.add(LargePotion);
+        this.board.add(medPotion);
         this.board.add(goblin);
         this.board.add(sword);
-        this.board.add(medPotion);
         return board;
 
-    }
 
+
+
+    }
 
 
     public int throwDice() {
@@ -61,11 +74,11 @@ public class GameCore {
      * This function handle all the logic of the game for now. It permit the user to throw the dice, view his character stats sheet, rename his character and quit the game.
      */
     public void playGame() {
-        this.generateBoard();
+        if (this.gameNumber == 0) {
+            this.generateBoard();
+        }
 
-
-        while (this.currentPosition < this.board.size()) {
-
+        while (this.currentPosition < this.board.size() - 1) {
             gameMenu.turnStart(this.turnCounter, this.currentPosition, this.heroPlayer);
             int intChoice = gameMenu.getAnswerInt(this.userInput, 4);
 
@@ -74,6 +87,9 @@ public class GameCore {
                     this.turnCounter++;
                     int diceResult = this.throwDice();
                     this.currentPosition += diceResult;
+                    if(currentPosition != this.board.size() - 1) {
+                        this.board.get(currentPosition).interactWithPlayer(heroPlayer);
+                    }
                 }
                 case 2 -> System.out.println(this.heroPlayer);
                 case 3 -> gameMenu.defineNewName(this.heroPlayer);
@@ -89,6 +105,7 @@ public class GameCore {
         }
 
         gameMenu.displayWinMessage();
+        this.gameNumber += 1;
         this.restartGame();
     }
 

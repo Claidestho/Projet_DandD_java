@@ -10,14 +10,16 @@ public abstract class Hero {
     private String name;
     private int healthPoints;
     private int attackPoints;
-
-    private Weapon weapon;
+    private int maxHealth;
+    private int maxAttack;
     private Potion potion;
 
-    protected Hero(String name, int healthPoints, int attackPoints) {
+    protected Hero(String name, int healthPoints, int attackPoints, int maxAttack, int maxHealth) {
         this.name = name;
         this.healthPoints = healthPoints;
         this.attackPoints = attackPoints;
+        this.maxAttack = maxAttack;
+        this.maxHealth = maxHealth;
     }
 
     /**
@@ -53,6 +55,22 @@ public abstract class Hero {
 
     public void setAttackPoints(int attackPoints) {
         this.attackPoints = attackPoints;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getMaxAttack() {
+        return maxAttack;
+    }
+
+    public void setMaxAttack(int maxAttack) {
+        this.maxAttack = maxAttack;
     }
 
     public void upgradeHealth(int amount){
