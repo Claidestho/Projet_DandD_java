@@ -1,6 +1,7 @@
 package system;
 
 import enemies.Dragon;
+import enemies.Enemy;
 import enemies.Goblin;
 import enemies.Sorcerer;
 import heros.Hero;
@@ -10,6 +11,8 @@ import items.spells.Fireball;
 import items.spells.Lightning;
 import items.weapons.Mace;
 import items.weapons.Sword;
+import items.weapons.Weapon;
+import main.InteractionInterface;
 import menu.MainMenu;
 import system.board.EmptyTile;
 import system.board.Tile;
@@ -67,8 +70,7 @@ public class GameCore {
     public int throwDice() {
         int maxDiceValue = 6;
         int minDiceValue = 1;
-        int diceResult = (int) Math.floor(Math.random() * (maxDiceValue - minDiceValue + 1) + minDiceValue);
-        return diceResult;
+        return (int) Math.floor(Math.random() * (maxDiceValue - minDiceValue + 1) + minDiceValue);
     }
 
     /**
@@ -87,6 +89,12 @@ public class GameCore {
                     this.turnCounter++;
                     int diceResult = this.throwDice();
                     this.currentPosition += diceResult;
+
+                    /* AFFICHAGE POUR UTILISATION DE L INTERFACE */
+                    if(this.board.get(currentPosition) instanceof InteractionInterface anInterface){
+                        anInterface.isInteracting();
+                    }
+
                     if (currentPosition != this.board.size() - 1) {
                         if (this.board.get(currentPosition).interactWithPlayer(heroPlayer)) {
                             this.gameNumber += 1;

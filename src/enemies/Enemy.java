@@ -1,9 +1,10 @@
 package enemies;
 
 import heros.Hero;
+import main.InteractionInterface;
 import system.board.Tile;
 import system.GameCore;
-public abstract class Enemy extends Tile {
+public abstract class Enemy extends Tile implements InteractionInterface {
     public int healthPoints;
     public int attackPoints;
 
@@ -89,5 +90,10 @@ public abstract class Enemy extends Tile {
 
         }
         return false;
+    }
+
+    @Override
+    public void isInteracting() {
+        System.out.println("CEST UN ENNEMI");
     }
 }

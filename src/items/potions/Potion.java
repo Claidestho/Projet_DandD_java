@@ -1,9 +1,10 @@
 package items.potions;
 
 import heros.Hero;
+import main.InteractionInterface;
 import system.board.Tile;
 
-public abstract class Potion extends Tile {
+public abstract class Potion extends Tile implements InteractionInterface {
     private int healthUpgrade;
 
     public Potion(String name, int healthUpgrade) {
@@ -46,5 +47,10 @@ public abstract class Potion extends Tile {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public void isInteracting() {
+        System.out.println("Ouiiiiiiiii" + this.name);
     }
 }

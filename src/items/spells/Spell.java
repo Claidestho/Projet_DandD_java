@@ -2,9 +2,10 @@ package items.spells;
 
 import heros.Hero;
 import heros.Magician;
+import main.InteractionInterface;
 import system.board.Tile;
 
-public abstract class Spell extends Tile {
+public abstract class Spell extends Tile implements InteractionInterface {
     private int power;
     private String authorizedClass = "Magicien";
 
@@ -46,5 +47,10 @@ public abstract class Spell extends Tile {
             System.out.println(name + " trouvé(s) ! Votre classe n'est pas compatible : (Classe authorisée : " + authorizedClass + ")");
         }
         return false;
+    }
+
+    @Override
+    public void isInteracting() {
+        System.out.println("CE+CI EST U N SORT IMLPEMENT");
     }
 }

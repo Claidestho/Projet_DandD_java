@@ -3,9 +3,10 @@ package items.weapons;
 import heros.Hero;
 import heros.Magician;
 import heros.Warrior;
+import main.InteractionInterface;
 import system.board.Tile;
 
-public abstract class Weapon extends Tile {
+public abstract class Weapon extends Tile implements InteractionInterface {
     private int strength;
     private String authorizedClass = "Guerrier";
 
@@ -46,5 +47,10 @@ public abstract class Weapon extends Tile {
             System.out.println(name + " trouvé(s) ! Votre classe n'est pas compatible : (Classe authorisée : " + authorizedClass + ")");
         }
         return false;
+    }
+
+    @Override
+    public void isInteracting() {
+        System.out.println("ARME ICI HIHF PEZO J?OPEJ POZE");
     }
 }
