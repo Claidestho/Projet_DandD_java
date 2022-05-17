@@ -5,7 +5,6 @@ import heros.Magician;
 import system.board.Tile;
 
 public abstract class Spell extends Tile {
-    private String name;
     private int power;
     private String authorizedClass = "Magicien";
 

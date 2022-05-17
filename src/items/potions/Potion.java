@@ -4,7 +4,6 @@ import heros.Hero;
 import system.board.Tile;
 
 public abstract class Potion extends Tile {
-    private String name;
     private int healthUpgrade;
 
     public Potion(String name, int healthUpgrade) {
@@ -44,5 +43,8 @@ public abstract class Potion extends Tile {
     }
 
 
-
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

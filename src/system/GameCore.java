@@ -2,19 +2,21 @@ package system;
 
 import enemies.Dragon;
 import enemies.Goblin;
+import enemies.Sorcerer;
 import heros.Hero;
 import items.potions.LargePotion;
 import items.potions.MediumPotion;
+import items.spells.Fireball;
 import items.spells.Lightning;
+import items.weapons.Mace;
 import items.weapons.Sword;
 import menu.MainMenu;
 import system.board.EmptyTile;
 import system.board.Tile;
 import system.exceptions.OutOfBoundException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.function.Supplier;
 
 /**
  * This class handle all the logic of the game. Need to put all the display in the MainMenu class.
@@ -34,32 +36,31 @@ public class GameCore {
         this.heroPlayer = player;
         this.tileNumber = 64;
         this.userInput = new Scanner(System.in);
-        this.board = new ArrayList<Tile>();
+        this.board = new ArrayList<Tile>(tileNumber);
     }
 
 
     public List generateBoard() {
-        Tile dragon = new Dragon();
-        Tile emptyTile = new EmptyTile();
-        Tile goblin = new Goblin();
-        Tile sword = new Sword();
-        Tile medPotion = new MediumPotion();
-        Tile LargePotion = new LargePotion();
-        Tile Lightning = new Lightning();
-
-        this.board.add(emptyTile);
-        this.board.add(emptyTile);
-        this.board.add(sword);
-        this.board.add(dragon);
-        this.board.add(LargePotion);
-        this.board.add(medPotion);
-        this.board.add(goblin);
-        this.board.add(sword);
+        Map<Supplier<Tile>, Integer> possibleTiles = new HashMap<>();
+        possibleTiles.put(Sword::new, 4);
+        possibleTiles.put(Dragon::new, 4);
+        possibleTiles.put(Sorcerer::new, 10);
+        possibleTiles.put(Goblin::new, 10);
+        possibleTiles.put(Mace::new, 5);
+        possibleTiles.put(Lightning::new, 5);
+        possibleTiles.put(Fireball::new, 2);
+        possibleTiles.put(MediumPotion::new, 6);
+        possibleTiles.put(LargePotion::new, 2);
+        possibleTiles.put(EmptyTile::new, 16);
+        for (Map.Entry<Supplier<Tile>, Integer> entry : possibleTiles.entrySet()) {
+            int value = entry.getValue();
+            for (int i = 0; i < value; i++) {
+                Tile key = entry.getKey().get();
+                board.add(key);
+            }
+        }
+        Collections.shuffle(board);
         return board;
-
-
-
-
     }
 
 
@@ -67,16 +68,15 @@ public class GameCore {
         int maxDiceValue = 6;
         int minDiceValue = 1;
         int diceResult = (int) Math.floor(Math.random() * (maxDiceValue - minDiceValue + 1) + minDiceValue);
-        return 1;
+        return diceResult;
     }
 
     /**
      * This function handle all the logic of the game for now. It permit the user to throw the dice, view his character stats sheet, rename his character and quit the game.
      */
     public void playGame() {
-        if (this.gameNumber == 0) {
-            this.generateBoard();
-        }
+        this.generateBoard().clear();
+        this.generateBoard();
 
         while (this.currentPosition < this.board.size() - 1) {
             gameMenu.turnStart(this.turnCounter, this.currentPosition, this.heroPlayer);
@@ -87,8 +87,11 @@ public class GameCore {
                     this.turnCounter++;
                     int diceResult = this.throwDice();
                     this.currentPosition += diceResult;
-                    if(currentPosition != this.board.size() - 1) {
-                        this.board.get(currentPosition).interactWithPlayer(heroPlayer);
+                    if (currentPosition != this.board.size() - 1) {
+                        if (this.board.get(currentPosition).interactWithPlayer(heroPlayer)) {
+                            this.gameNumber += 1;
+                            restartGame();
+                        }
                     }
                 }
                 case 2 -> System.out.println(this.heroPlayer);

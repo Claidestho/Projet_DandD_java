@@ -6,7 +6,6 @@ import heros.Warrior;
 import system.board.Tile;
 
 public abstract class Weapon extends Tile {
-    private String name;
     private int strength;
     private String authorizedClass = "Guerrier";
 
