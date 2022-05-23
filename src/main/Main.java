@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         DatabaseConnection db = new DatabaseConnection();
-        db.connectDB();
+        db.listHeroesFromDB(db.executeQueries( "SELECT * FROM hero"));
 
         MainMenu menu = new MainMenu();
         Hero playerCharacter = menu.startMenu();

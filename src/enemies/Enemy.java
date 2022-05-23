@@ -93,7 +93,7 @@ public abstract class Enemy extends Tile implements InteractionInterface {
     }
 
     @Override
-    public void isInteracting() {
+    public void typeOfInteract() {
         System.out.println("CEST UN ENNEMI");
     }
 }

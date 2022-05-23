@@ -3,7 +3,11 @@ package menu;
 import heros.Hero;
 import heros.Magician;
 import heros.Warrior;
+import system.database.DatabaseConnection;
 
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -12,6 +16,7 @@ import java.util.Scanner;
  */
 public class MainMenu {
     private Scanner userInput;
+    private DatabaseConnection db = new DatabaseConnection();
 
     /**
      * This constructor will define the Scanner attribute used to receive users inputs.
@@ -28,8 +33,7 @@ public class MainMenu {
     public Hero startMenu() {
         int wantsToPlay = displayWelcomeMessage();
         if (wantsToPlay == 1) {
-            Hero playerCharacter = createNewCharacter();
-            return playerCharacter;
+            return createNewCharacter();
 
         } else {
             System.exit(0);
@@ -39,20 +43,24 @@ public class MainMenu {
     }
 
     /**
-     * This method displau the logo of the game and receive user input
+     * This method display the logo of the game and receive user input
      *
      * @return
      */
     public int displayWelcomeMessage() {
-        System.out.println("$$$$$$$\\         $$$$$$\\                  $$\\       $$$$$$$\\  \n" +
-                "$$  __$$\\       $$  __$$\\                 $$ |      $$  __$$\\ \n" +
-                "$$ |  $$ |      $$ /  $$ |$$$$$$$\\   $$$$$$$ |      $$ |  $$ |\n" +
-                "$$ |  $$ |      $$$$$$$$ |$$  __$$\\ $$  __$$ |      $$ |  $$ |\n" +
-                "$$ |  $$ |      $$  __$$ |$$ |  $$ |$$ /  $$ |      $$ |  $$ |\n" +
-                "$$ |  $$ |      $$ |  $$ |$$ |  $$ |$$ |  $$ |      $$ |  $$ |\n" +
-                "$$$$$$$  |      $$ |  $$ |$$ |  $$ |\\$$$$$$$ |      $$$$$$$  |\n" +
-                "\\_______/       \\__|  \\__|\\__|  \\__| \\_______|      \\_______/ \n");
-        System.out.print("Bienvenue dans Donjons et Dragons ! Voulez vous créer un personnage (1) ou quitter le jeu (2) ?");
+        System.out.println(" /$$$$$$$                                                                               /$$$$$$                  /$$       /$$$$$$$                                                            \n" +
+                "| $$__  $$                                                                             /$$__  $$                | $$      | $$__  $$                                                           \n" +
+                "| $$  \\ $$ /$$   /$$ /$$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$$   /$$$$$$$      | $$  \\ $$ /$$$$$$$   /$$$$$$$      | $$  \\ $$  /$$$$$$  /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$$   /$$$$$$$\n" +
+                "| $$  | $$| $$  | $$| $$__  $$ /$$__  $$ /$$__  $$ /$$__  $$| $$__  $$ /$$_____/      | $$$$$$$$| $$__  $$ /$$__  $$      | $$  | $$ /$$__  $$|____  $$ /$$__  $$ /$$__  $$| $$__  $$ /$$_____/\n" +
+                "| $$  | $$| $$  | $$| $$  \\ $$| $$  \\ $$| $$$$$$$$| $$  \\ $$| $$  \\ $$|  $$$$$$       | $$__  $$| $$  \\ $$| $$  | $$      | $$  | $$| $$  \\__/ /$$$$$$$| $$  \\ $$| $$  \\ $$| $$  \\ $$|  $$$$$$ \n" +
+                "| $$  | $$| $$  | $$| $$  | $$| $$  | $$| $$_____/| $$  | $$| $$  | $$ \\____  $$      | $$  | $$| $$  | $$| $$  | $$      | $$  | $$| $$      /$$__  $$| $$  | $$| $$  | $$| $$  | $$ \\____  $$\n" +
+                "| $$$$$$$/|  $$$$$$/| $$  | $$|  $$$$$$$|  $$$$$$$|  $$$$$$/| $$  | $$ /$$$$$$$/      | $$  | $$| $$  | $$|  $$$$$$$      | $$$$$$$/| $$     |  $$$$$$$|  $$$$$$$|  $$$$$$/| $$  | $$ /$$$$$$$/\n" +
+                "|_______/  \\______/ |__/  |__/ \\____  $$ \\_______/ \\______/ |__/  |__/|_______/       |__/  |__/|__/  |__/ \\_______/      |_______/ |__/      \\_______/ \\____  $$ \\______/ |__/  |__/|_______/ \n" +
+                "                               /$$  \\ $$                                                                                                                /$$  \\ $$                              \n" +
+                "                              |  $$$$$$/                                                                                                               |  $$$$$$/                              \n" +
+                "                               \\______/                                                                                                                 \\______/                               \n" +
+                "\n ");
+        System.out.print("Bienvenue dans Donjons et Dragons ! Voulez vous créer un personnage (1) , voir la liste des personnages (2) ou quitter le jeu (3) ?");
         return getAnswerInt(this.userInput, 2);
 
     }
@@ -141,7 +149,18 @@ public class MainMenu {
                     "(    .'  _ )     )\n" +
                     "'-  ()_.\\,\\,   -");
         }
-        playerClass.toString();
+        try {
+            PreparedStatement query = db.connectDB().prepareStatement("INSERT INTO hero(type, name, health_points, attack_points) VALUE(?,?,?,?)");
+        query.setString(1, playerClass.getClass().getSimpleName());
+        query.setString(2, playerClass.getName());
+        query.setInt(3, playerClass.getHealthPoints());
+        query.setInt(4, playerClass.getAttackPoints());
+        query.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+//        db.updateDB("INSERT INTO hero(type, name, health_points, attack_points) VALUE ('" + playerClass.getClass().getSimpleName() + "','" + playerClass.getName() + "','" + playerClass.getHealthPoints() + "'," + playerClass.getAttackPoints() + ")");
         return playerClass;
     }
 

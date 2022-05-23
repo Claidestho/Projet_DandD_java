@@ -50,7 +50,7 @@ public abstract class Spell extends Tile implements InteractionInterface {
     }
 
     @Override
-    public void isInteracting() {
+    public void typeOfInteract() {
         System.out.println("CE+CI EST U N SORT IMLPEMENT");
     }
 }

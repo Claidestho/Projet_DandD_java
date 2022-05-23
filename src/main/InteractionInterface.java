@@ -1,5 +1,5 @@
 package main;
 
 public interface InteractionInterface {
-    void isInteracting();
+    void typeOfInteract();
 }

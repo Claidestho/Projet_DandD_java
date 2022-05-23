@@ -1,7 +1,6 @@
 package system;
 
 import enemies.Dragon;
-import enemies.Enemy;
 import enemies.Goblin;
 import enemies.Sorcerer;
 import heros.Hero;
@@ -11,7 +10,6 @@ import items.spells.Fireball;
 import items.spells.Lightning;
 import items.weapons.Mace;
 import items.weapons.Sword;
-import items.weapons.Weapon;
 import main.InteractionInterface;
 import menu.MainMenu;
 import system.board.EmptyTile;
@@ -32,7 +30,6 @@ public class GameCore {
     private final Scanner userInput;
     private int currentPosition;
     private int turnCounter;
-    private int gameNumber;
 
     public GameCore(MainMenu menu, Hero player) {
         this.gameMenu = menu;
@@ -62,6 +59,7 @@ public class GameCore {
                 board.add(key);
             }
         }
+        System.out.println(board);
         Collections.shuffle(board);
         return board;
     }
@@ -92,12 +90,11 @@ public class GameCore {
 
                     /* AFFICHAGE POUR UTILISATION DE L INTERFACE */
                     if(this.board.get(currentPosition) instanceof InteractionInterface anInterface){
-                        anInterface.isInteracting();
+                        anInterface.typeOfInteract();
                     }
 
                     if (currentPosition != this.board.size() - 1) {
                         if (this.board.get(currentPosition).interactWithPlayer(heroPlayer)) {
-                            this.gameNumber += 1;
                             restartGame();
                         }
                     }
@@ -116,7 +113,6 @@ public class GameCore {
         }
 
         gameMenu.displayWinMessage();
-        this.gameNumber += 1;
         this.restartGame();
     }
 

@@ -50,7 +50,7 @@ public abstract class Weapon extends Tile implements InteractionInterface {
     }
 
     @Override
-    public void isInteracting() {
+    public void typeOfInteract() {
         System.out.println("ARME ICI HIHF PEZO J?OPEJ POZE");
     }
 }

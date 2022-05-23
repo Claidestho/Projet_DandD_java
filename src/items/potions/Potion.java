@@ -50,7 +50,7 @@ public abstract class Potion extends Tile implements InteractionInterface {
     }
 
     @Override
-    public void isInteracting() {
+    public void typeOfInteract() {
         System.out.println("Ouiiiiiiiii" + this.name);
     }
 }
